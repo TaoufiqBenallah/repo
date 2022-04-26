@@ -1,0 +1,9 @@
+cda:
+  build:
+    security:
+      checkmarx:
+        team: 'CxServer\RBI\RCIS'
+        enable-scan: true # optional, set to false to temporarily disable scans
+        #branch-filter-regex: '^(pre)?master$' # optional, start scan only if branch name matches this regular expression
+        fail-build: true # optional; set to false to only get a Checkmarx report but not fail the build if thresholds are exceeded (default: true)
+        wait-scan-timeout: 10 # optional, only for fail-build=false; after the actual build finishes, wait up to this amount of minutes for Checkmarx logs (default: -1 (infinite))

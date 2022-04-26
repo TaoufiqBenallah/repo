@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ parameters['ServiceName'] }}
+spec:
+  template:
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ parameters['ServiceName'] }}
+              topologyKey: topology.kubernetes.io/zone
+            weight: 100
+          - podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - {{ parameters['ServiceName'] }}
+              topologyKey: kubernetes.io/hostname
+            weight: 99
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: nodegroup
+                operator: In
+                values:
+                -  {{ parameters['NWU'] | lower }}
+      tolerations:
+       - key: "function"
+         operator: "Equal"
+         value: "{{ parameters['NWU'] | lower }}"
+         effect: "NoSchedule"
+{% if parameters['MaxMemory'] is defined or parameters['MaxCpu'] is defined %}
+      containers:
+       - name: {{ parameters['ServiceName'] }}-container
+         resources:
+           requests:
+{% if parameters['MaxMemory'] is defined %}
+             memory: "{{ parameters['MaxMemory'] }}Mi"
+{% endif %}
+{% if parameters['MaxCpu'] is defined %}
+             cpu: "{{ parameters['MaxCpu'] }}m"
+{% endif %}
+           limits:
+{% if parameters['MaxMemory'] is defined %}
+             memory: "{{ parameters['MaxMemory']|int *4 }}Mi"
+{% endif %}
+{% if parameters['MaxCpu'] is defined %}
+             cpu: "{{ parameters['MaxCpu']|int *4 }}m"
+{% endif %}
+{% endif %}

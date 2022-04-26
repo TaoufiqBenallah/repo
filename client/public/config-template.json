@@ -1,0 +1,62 @@
+{
+  "workflowApiVersion": "1.1",
+  "metaData": {
+    "icon": "assets/images/icon.png",
+    "iconSmall": "assets/images/icon.png",
+    "category": "custom"
+  },
+  "type": "REST",
+  "lang": {
+    "en-US": {
+      "description": "SME DAT custom activity",
+      "step1Label": "Configure Activity"
+    }
+  },
+  "arguments": {
+    "execute": {
+      "url": "https://$DOMAIN/journey/execute",
+      "inArguments": [
+      ],
+      "outArguments": [],
+      "verb": "POST",
+      "body": "",
+      "header": "",
+      "format": "json",
+      "useJwt": true,
+      "timeout": 10000,
+      "customerKey": "$JWT_CUSTOMER_KEY"
+    }
+  },
+  "configurationArguments": {
+    "save": {
+      "url": "https://$DOMAIN/journey/save",
+      "verb": "POST",
+      "useJwt": true,
+      "customerKey": "$JWT_CUSTOMER_KEY"
+    },
+    "publish": {
+      "url": "https://$DOMAIN/journey/publish",
+      "verb": "POST",
+      "useJwt": true,
+      "customerKey": "$JWT_CUSTOMER_KEY"
+    },
+    "stop": {
+      "url": "https://$DOMAIN/journey/stop",
+      "verb": "POST",
+      "useJwt": true,
+      "customerKey": "$JWT_CUSTOMER_KEY"
+    },
+    "validate": {
+      "url": "https://$DOMAIN/journey/validate",
+      "verb": "POST",
+      "useJwt": true,
+      "customerKey": "$JWT_CUSTOMER_KEY"
+    }
+  },
+  "userInterfaces": {
+    "configInspector": {
+      "hideHeader": true,
+      "size": "scm-sm"
+    }
+  }
+}

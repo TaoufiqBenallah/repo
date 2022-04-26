@@ -1,0 +1,8 @@
+resources:
+- hpa.yaml
+
+bases:
+- ../merlin-k8s-base
+
+patchesStrategicMerge:
+- patch-deploy.yaml

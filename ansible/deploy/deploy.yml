@@ -1,0 +1,66 @@
+- hosts: localhost
+  tasks:
+    - include_role:
+        name: merlin-service-deploy-lib/kms
+    - include_role:
+        name: merlin-service-deploy-lib/elasti-cache-replicationgroup
+    - set_fact:
+        ns: "{{ parameters['ServiceName'] }}"
+    - include_role:
+        name: merlin-service-deploy-lib/rds
+    - include_role:
+        name: merlin-service-deploy-lib/k8s-namespace
+      vars:
+        k8s_namespace: "{{ parameters['ServiceName'] }}"
+    - include_role:
+        name: merlin-service-deploy-lib/service
+      vars:
+        k8s_namespace: "{{ parameters['ServiceName'] }}"
+        k8s_kustomize_include_deploy: "True"
+        secrets:
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/jwt"
+            type: ssmparameter
+            k8s_secret_name: jwt
+            k8s_secret_data_field: jwt
+            env_var_name: JWT
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/jwt_customer_key"
+            type: ssmparameter
+            k8s_secret_name: jwt-customer-key
+            k8s_secret_data_field: jwt-customer-key
+            env_var_name: JWT_CUSTOMER_KEY
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/spring.datasource.password"
+            type: ssmparameter
+            k8s_secret_name: spring-datasource-password
+            k8s_secret_data_field: spring-datasource-password
+            env_var_name: POSTGRES_PASSWORD
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/spring.redis.password"
+            type: ssmparameter
+            k8s_secret_name: spring-redis-password
+            k8s_secret_data_field: spring-redis-password
+            env_var_name: REDIS_TOKEN
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/sfmc_client_id"
+            type: ssmparameter
+            k8s_secret_name: sfmc-client-id
+            k8s_secret_data_field: sfmc-client-id
+            env_var_name: SFMC_CLIENT_ID
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/sfmc_client_secret"
+            type: ssmparameter
+            k8s_secret_name: sfmc-client-secret
+            k8s_secret_data_field: sfmc-client-secret
+            env_var_name: SFMC_CLIENT_SECRET
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/sme_dat_api_client_id"
+            type: ssmparameter
+            k8s_secret_name: sme-dat-api-client-id
+            k8s_secret_data_field: sme-dat-api-client-id
+            env_var_name: SME_DAT_API_CLIENT_ID
+          - name: "/Config/{{ parameters['EnvironmentNameUpper'] }}/{{ parameters['ServiceName'] }}/sme_dat_api_client_secret"
+            type: ssmparameter
+            k8s_secret_name: sme-dat-api-client-secret
+            k8s_secret_data_field: sme-dat-api-client-secret
+            env_var_name: SME_DAT_API_CLIENT_SECRET
+    - include_role:
+        name: merlin-service-deploy-lib/waf-deploy
+    - include_role:
+        name: merlin-service-deploy-lib/apigw-deploy
+      vars:
+        api_file: 'files/api.yaml'

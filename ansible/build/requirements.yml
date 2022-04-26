@@ -1,0 +1,3 @@
+- src: https://build_automation@code.rbinternational.corp/bitbucket/scm/merlin/merlin-build-lib.git
+  scm: git
+

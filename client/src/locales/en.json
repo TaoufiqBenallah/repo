@@ -1,0 +1,28 @@
+{
+  "app.header": "SME DAT",
+  "offer_id.label": "Offer id",
+  "customer_name.label": "Customer name",
+  "rm_name.label": "RM name",
+  "offer_name.label": "Offer name",
+  "product_name.label": "Product name",
+  "beginning_date.label": "Beginning date",
+  "end_date.label": "End date",
+  "channel.label": "Channel",
+  "action_status.label": "Action status",
+  "action_detail.label": "Action detail",
+
+  "input.text.help": "Max length is 1000 symbols",
+
+  "add.button.close": "Add",
+  "remove.button.close": "Remove",
+
+  "empty.info": "(empty)",
+
+  "error.go_home": "Go home",
+  "error.reload_app": "Reload app",
+  "error.page_not_found.title": "Page not found",
+  "error.page_not_found.description": "The page you are looking for was not found",
+  "error.general.title": "Something went wrong",
+  "error.general.description": "We apologise and are fixing the problem. Please try again later",
+  "error.unpopulated.fields": "Please, populate all the required fields"
+}

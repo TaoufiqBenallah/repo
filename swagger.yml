@@ -1,0 +1,322 @@
+openapi: 3.0.0
+info:
+  title: SME DAT integration
+  version: 0.0.1
+paths:
+  /index.html:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified
+  /config.json:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified
+  /assets/images/logo.svg:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified       
+  /js/app.js:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified       
+  /js/chunk-vendors.js:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified              
+  /css/app.css:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified  
+  /assets/images/themes/oneSalesforce/banner-brand-default.png:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified
+  /assets/icons/utility-sprite/svg/symbols.svg:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified
+  /fonts/SalesforceSans-Light.woff:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified        
+  /fonts/SalesforceSans-Light.woff2:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified
+  /fonts/SalesforceSans-Regular.woff:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified        
+  /fonts/SalesforceSans-Regular.woff2:
+    get:
+      responses:
+        '200':
+          description: OK
+        '304':
+          description: Not modified   
+  /journey/execute:
+    post:
+      summary: Endpoint used to execute the journey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                inArguments:
+                  type: array
+                  items: {}
+                outArguments:
+                  type: array
+                  items: {}
+                activityObjectID:
+                  type: string
+                  example: 4ce1a85a-14d4-4216-8574-8db55028db13
+                journeyId:
+                  type: string
+                  example: 075fe2eb-08d2-40d5-8fe9-0d0b80506226
+                activityId:
+                  type: string
+                  example: 4ce1a85a-14d4-4216-8574-8db55028db13
+                definitionInstanceId:
+                  type: string
+                  example: fc86adbe-864a-47b5-b867-93566a2aa9bf
+                activityInstanceId:
+                  type: string
+                  example: 112c5bee-aa6f-4971-9f8c-b8bc6d7beb7b
+                keyValue:
+                  type: string
+                  example: test@test.com
+                mode:
+                  type: integer
+                  example: 0
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
+  /journey/save:
+    post:
+      summary: Endpoint used to save the journey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityObjectID:
+                  type: string
+                  example: 53db1f41-3983-4f96-a45a-d7d8f968fb22
+                interactionId:
+                  type: string
+                  example: 50ed1f0c-d74c-44de-99b0-9721ce97bbe1
+                originalDefinitionId:
+                  type: string
+                  example: 075fe2eb-08d2-40d5-8fe9-0d0b80506226
+                interactionKey:
+                  type: string
+                  example: bdfe0d45-f62b-8ef5-82c1-82cde48023dc
+                interactionVersion:
+                  type: string
+                  example: '3'
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
+  /journey/publish:
+    post:
+      summary: Endpoint used to publish the journey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityObjectID:
+                  type: string
+                  example: 53db1f41-3983-4f96-a45a-d7d8f968fb22
+                interactionId:
+                  type: string
+                  example: 50ed1f0c-d74c-44de-99b0-9721ce97bbe1
+                originalDefinitionId:
+                  type: string
+                  example: 075fe2eb-08d2-40d5-8fe9-0d0b80506226
+                interactionKey:
+                  type: string
+                  example: bdfe0d45-f62b-8ef5-82c1-82cde48023dc
+                interactionVersion:
+                  type: string
+                  example: '3'
+                isPublished:
+                  type: boolean
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
+  /journey/stop:
+    post:
+      summary: Endpoint used to stop the journey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityObjectID:
+                  type: string
+                  example: 53db1f41-3983-4f96-a45a-d7d8f968fb22
+                interactionId:
+                  type: string
+                  example: 50ed1f0c-d74c-44de-99b0-9721ce97bbe1
+                originalDefinitionId:
+                  type: string
+                  example: 075fe2eb-08d2-40d5-8fe9-0d0b80506226
+                interactionKey:
+                  type: string
+                  example: bdfe0d45-f62b-8ef5-82c1-82cde48023dc
+                interactionVersion:
+                  type: string
+                  example: '3'
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
+  /journey/validate:
+    post:
+      summary: Endpoint used to stop the journey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activityObjectID:
+                  type: string
+                  example: 53db1f41-3983-4f96-a45a-d7d8f968fb22
+                interactionId:
+                  type: string
+                  example: 50ed1f0c-d74c-44de-99b0-9721ce97bbe1
+                originalDefinitionId:
+                  type: string
+                  example: 075fe2eb-08d2-40d5-8fe9-0d0b80506226
+                interactionKey:
+                  type: string
+                  example: bdfe0d45-f62b-8ef5-82c1-82cde48023dc
+                interactionVersion:
+                  type: string
+                  example: '3'
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
+  /token:
+    post:
+      summary: Endpoint used to validate token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: 53db1f41-3983-4f96-a45a-d7d8f968fb22
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.        
+  /mgmt/health:
+    get:
+      summary: Health check endpoint
+      responses:
+        '200':
+          description: Response with status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+        '500':
+          description: Unexpected error.
